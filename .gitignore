@@ -1,0 +1,48 @@
+# heavy / generated
+pipeline_outputs/
+submission_outputs/
+outputs/
+Datasets/
+Discord/
+*.tar.gz
+*.zip
+
+# python runtime
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# credentials / env
+.env
+.env.*
+*.pem
+*.key
+
+# NHA sample client (sandbox provides its own with credentials baked in)
+code/nha_client.py
+
+# local IDE + Claude Code settings
+.vscode/
+.idea/
+.claude/
+
+# scratch folders not needed for submission
+Notebook/
+Discord/
+meeting-transropt/
+ps1/
+sandbox-images/
+website-images-for-content/
+output/
+
+# superpowers scratch
+docs/superpowers/
+
+# OS
+.DS_Store
+Thumbs.db

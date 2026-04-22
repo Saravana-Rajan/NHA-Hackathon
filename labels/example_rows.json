@@ -1,0 +1,46 @@
+{
+  "MG064A": [
+    {"case_id": "C1", "link": "Bucket_name/document.pdf", "procedure_code": "MG064A", "page_number": 1,
+     "clinical_notes": 0, "cbc_hb_report": 1, "indoor_case": 0, "treatment_details": 0,
+     "post_hb_report": 0, "discharge_summary": 0, "severe_anemia": 1, "common_signs": 0,
+     "significant_signs": 0, "life_threatening_signs": 0, "extra_document": 0, "document_rank": 2},
+    {"case_id": "C2", "link": "Bucket_name/document.pdf", "procedure_code": "MG064A", "page_number": 2,
+     "clinical_notes": 0, "cbc_hb_report": 0, "indoor_case": 0, "treatment_details": 0,
+     "post_hb_report": 0, "discharge_summary": 0, "severe_anemia": 0, "common_signs": 0,
+     "significant_signs": 0, "life_threatening_signs": 0, "extra_document": 1, "document_rank": 99}
+  ],
+  "SG039C": [
+    {"case_id": "MAV/GJ/R3/2026032310030008", "S3_link/DocumentName": "Bucket_name/document.pdf",
+     "procedure_code": "SG039C", "page_number": 1, "clinical_notes": 0, "usg_report": 0,
+     "lft_report": 0, "operative_notes": 0, "pre_anesthesia": 0, "discharge_summary": 1,
+     "photo_evidence": 0, "histopathology": 0, "clinical_condition": 1, "usg_calculi": 0,
+     "pain_present": 1, "previous_surgery": 0, "extra_document": 0, "document_rank": 5},
+    {"case_id": "MAV/GJ/R3/2026032310030008", "S3_link/DocumentName": "Bucket_name/document.pdf",
+     "procedure_code": "SG039C", "page_number": 2, "clinical_notes": 0, "usg_report": 0,
+     "lft_report": 0, "operative_notes": 0, "pre_anesthesia": 0, "discharge_summary": 1,
+     "photo_evidence": 0, "histopathology": 0, "clinical_condition": 0, "usg_calculi": 0,
+     "pain_present": 0, "previous_surgery": 0, "extra_document": 0, "document_rank": 5}
+  ],
+  "MG006A": [
+    {"case_id": "C1", "S3_link/DocumentName": "Bucket_name/document.pdf", "procedure_code": "MG006A",
+     "page_number": 1, "clinical_notes": 0, "investigation_pre": 1, "pre_date": "6/2/26",
+     "vitals_treatment": 0, "investigation_post": 0, "post_date": null, "discharge_summary": 0,
+     "poor_quality": 1, "fever": 0, "symptoms": 0, "extra_document": 0, "document_rank": 6},
+    {"case_id": "C2", "S3_link/DocumentName": "Bucket_name/document.pdf", "procedure_code": "MG006A",
+     "page_number": 2, "clinical_notes": 0, "investigation_pre": 1, "pre_date": "6/2/26",
+     "vitals_treatment": 0, "investigation_post": 0, "post_date": null, "discharge_summary": 0,
+     "poor_quality": 1, "fever": 0, "symptoms": 0, "extra_document": 0, "document_rank": 2}
+  ],
+  "SB039A": [
+    {"case_id": "C1", "s3_link": "Bucket_name/document.pdf", "procedure_code": "SB039A",
+     "page_number": 1, "clinical_notes": 0, "xray_ct_knee": 0, "indoor_case": 0,
+     "operative_notes": 0, "implant_invoice": 0, "post_op_photo": 0, "post_op_xray": 0,
+     "discharge_summary": 0, "doa": null, "dod": null, "arthritis_type": 0,
+     "post_op_implant_present": 0, "age_valid": 0, "extra_document": 1, "document_rank": 99},
+    {"case_id": "C2", "s3_link": "Bucket_name/document.pdf", "procedure_code": "SB039A",
+     "page_number": 2, "clinical_notes": 0, "xray_ct_knee": 0, "indoor_case": 0,
+     "operative_notes": 0, "implant_invoice": 0, "post_op_photo": 0, "post_op_xray": 0,
+     "discharge_summary": 0, "doa": null, "dod": null, "arthritis_type": 0,
+     "post_op_implant_present": 0, "age_valid": 0, "extra_document": 1, "document_rank": 99}
+  ]
+}
