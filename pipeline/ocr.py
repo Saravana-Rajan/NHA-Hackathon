@@ -19,11 +19,19 @@ _EASY_INSTANCE = None
 
 
 def _get_easy():
-    """Lazily initialize EasyOCR reader once (downloads model weights on first use)."""
+    """Lazily initialize EasyOCR reader once (downloads model weights on first use).
+
+    Auto-detects CUDA via torch so the sandbox GPU is used when available.
+    """
     global _EASY_INSTANCE
     if _EASY_INSTANCE is None:
         import easyocr
-        _EASY_INSTANCE = easyocr.Reader(["en"], gpu=False, verbose=False)
+        try:
+            import torch
+            gpu_enabled = bool(torch.cuda.is_available())
+        except Exception:
+            gpu_enabled = False
+        _EASY_INSTANCE = easyocr.Reader(["en"], gpu=gpu_enabled, verbose=False)
     return _EASY_INSTANCE
 
 
