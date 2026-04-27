@@ -6,6 +6,7 @@ timeline) into a complete pass that produces schema-valid, rule-populated
 rows for every case.
 """
 from __future__ import annotations
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -32,8 +33,46 @@ from rules.sb039a_tkr import evaluate_page_sb039a
 from rules.sg039c_cholecystectomy import evaluate_page_sg039c
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CLAIMS_ROOT = REPO_ROOT / "Datasets" / "filesofdata" / "Claims"
-WORK_ROOT = REPO_ROOT / "pipeline_outputs"
+
+
+def _resolve_claims_root() -> Path:
+    """Pick the claims root, preferring evaluator-mounted paths.
+
+    Resolution order:
+      1. ``NHA_CLAIMS_ROOT`` env var (if set and exists).
+      2. ``/mnt/databanks/input`` and common subpaths under it (NHA sandbox).
+      3. Repo-local ``Datasets/filesofdata/Claims`` (developer machine).
+    """
+    env_override = os.environ.get("NHA_CLAIMS_ROOT", "").strip()
+    if env_override:
+        p = Path(env_override)
+        if p.exists():
+            return p
+
+    databank_input = Path("/mnt/databanks/input")
+    if databank_input.exists():
+        for candidate in (
+            databank_input / "filesofdata" / "Claims",
+            databank_input / "Claims",
+            databank_input,
+        ):
+            if candidate.exists():
+                return candidate
+
+    return REPO_ROOT / "Datasets" / "filesofdata" / "Claims"
+
+
+def _resolve_work_root() -> Path:
+    env_override = os.environ.get("NHA_WORK_ROOT", "").strip()
+    if env_override:
+        return Path(env_override)
+    if Path("/mnt/databanks").exists():
+        return Path("/mnt/databanks/work")
+    return REPO_ROOT / "pipeline_outputs"
+
+
+CLAIMS_ROOT = _resolve_claims_root()
+WORK_ROOT = _resolve_work_root()
 
 
 RULE_EVALUATORS = {

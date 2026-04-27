@@ -134,6 +134,16 @@ def print_token_summary(llm_client) -> None:
     print(f"  cache_misses       : {getattr(llm_client, 'cache_misses', 0)}")
 
 
+def _default_out_dir() -> Path:
+    """Pick the default output dir, preferring NHA-mounted paths."""
+    env_override = os.environ.get("NHA_OUTPUT_DIR", "").strip()
+    if env_override:
+        return Path(env_override)
+    if Path("/mnt/databanks").exists():
+        return Path("/mnt/databanks/output")
+    return REPO_ROOT / "submission_outputs"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build NHA PS-01 submission JSON files.")
     parser.add_argument(
@@ -144,7 +154,7 @@ def main() -> int:
     parser.add_argument(
         "--out",
         type=Path,
-        default=REPO_ROOT / "submission_outputs",
+        default=_default_out_dir(),
         help="Output directory for <PACKAGE>.json files.",
     )
     args = parser.parse_args()
