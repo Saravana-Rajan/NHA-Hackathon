@@ -135,12 +135,24 @@ def print_token_summary(llm_client) -> None:
 
 
 def _default_out_dir() -> Path:
-    """Pick the default output dir, preferring NHA-mounted paths."""
+    """Pick the default output dir, preferring NHA-mounted paths.
+
+    Resolution order:
+      1. ``NHA_OUTPUT_DIR`` env var (always wins).
+      2. ``/mnt/databanks/output`` if writable (NHA evaluator container).
+      3. ``~/outputs`` if we're clearly in the NHA notebook sandbox
+         (signaled by ``~/Claims`` existing — that's where the
+         ``databank_download_widget`` puts the dataset).
+      4. Repo-local ``submission_outputs/`` (developer fallback).
+    """
     env_override = os.environ.get("NHA_OUTPUT_DIR", "").strip()
     if env_override:
         return Path(env_override)
-    if Path("/mnt/databanks").exists():
-        return Path("/mnt/databanks/output")
+    databank = Path("/mnt/databanks")
+    if databank.exists() and os.access(databank, os.W_OK):
+        return databank / "output"
+    if (Path.home() / "Claims").exists():
+        return Path.home() / "outputs"
     return REPO_ROOT / "submission_outputs"
 
 

@@ -59,6 +59,10 @@ def _resolve_claims_root() -> Path:
             if candidate.exists():
                 return candidate
 
+    home_claims = Path.home() / "Claims"
+    if home_claims.exists():
+        return home_claims
+
     return REPO_ROOT / "Datasets" / "filesofdata" / "Claims"
 
 
@@ -66,8 +70,9 @@ def _resolve_work_root() -> Path:
     env_override = os.environ.get("NHA_WORK_ROOT", "").strip()
     if env_override:
         return Path(env_override)
-    if Path("/mnt/databanks").exists():
-        return Path("/mnt/databanks/work")
+    databank = Path("/mnt/databanks")
+    if databank.exists() and os.access(databank, os.W_OK):
+        return databank / "work"
     return REPO_ROOT / "pipeline_outputs"
 
 
